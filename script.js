@@ -4,24 +4,19 @@ function requestInfo(location){
     .then(res => res.json())
     .then(data => filterData(data))
     .catch(err => alert(err))
-    
-
 }
 
-
-
-
 const filterData = (data) => {
+    console.log(data)
     const filtered =  {
         name: data.location.name,
+        country: data.location.country,
         tempCelsius: data.current.temp_c,
         tempFarenheit: data.current.temp_f,
-        humidity: data.current.humidity
+        humidity: data.current.humidity,
+        weather: data.current.condition.icon
     }
-    console.log(filtered)
-    
     return filtered
-    
 }
 
 const city = document.getElementById('city')
@@ -32,7 +27,6 @@ submitBtn.addEventListener('click', (e) =>{
     e.preventDefault()
     infoDiv.innerHTML = ''
     display()
-    
 })
 
 
@@ -41,16 +35,19 @@ const createContainer = async (city) => {
     const para = document.createElement('p')
     const span = document.createElement('span')
     const h2 = document.createElement('h2')
+    const img = document.createElement('img')
     const myData = await requestInfo(city)
-    
 
-    para.textContent = `The temperature on ${myData.name} right now is:`
-    span.textContent = myData.tempCelsius + ' C'
+    para.textContent = `${myData.name}, ${myData.country}:`
+    span.textContent = myData.tempCelsius + ' ºC'
+    img.src = "https://" + myData.weather
     h2.textContent = 'Humidity: ' + myData.humidity + '%'
 
     div.classList = 'container'
     div.appendChild(para)
+    div.appendChild(img)
     div.appendChild(span)
+    
     div.appendChild(h2)
 
     infoDiv.appendChild(div)

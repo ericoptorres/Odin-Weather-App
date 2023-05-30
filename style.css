@@ -1,0 +1,29 @@
+*{
+    font-family: "Noto Sans", sans-serif;
+}
+
+form{
+    display: flex;
+    justify-content: end;
+    gap: 5px;
+}
+
+body{
+    margin: 50px;
+    background-color: lightgrey;
+}
+
+span{
+    font-size: 200%;
+    margin-left: 50px;
+    
+}
+
+p{
+    font-size: 200%;
+    font-weight: bold;
+}
+
+h2{
+    color: rgb(102, 148, 177);
+}
