@@ -15,8 +15,8 @@ body{
 
 span{
     font-size: 200%;
-    margin-left: 50px;
-    
+    display: inline-block;
+    text-align: center;
 }
 
 p{
@@ -26,4 +26,18 @@ p{
 
 h2{
     color: rgb(102, 148, 177);
+    font-size: 120%;
 }
+
+.container > div{
+    display: flex;
+    align-content: center;
+    gap: 50px;
+}
+
+.switchBtn{
+    height: 40px;
+    width: 70px;
+    border-radius: 50%;
+}
+

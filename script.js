@@ -29,6 +29,30 @@ submitBtn.addEventListener('click', (e) =>{
     display()
 })
 
+const createSwitchBtn = () =>{
+    const btn = document.createElement('button')
+    btn.classList.add('switchBtn')
+    btn.textContent = 'Switch format'
+    btn.addEventListener('click', () => {
+        selectedCelsius = !selectedCelsius
+        selectFormat(selectedCelsius)
+        infoDiv.innerHTML = ''
+        display()
+    })
+    return btn
+}
+
+let selectedCelsius = true
+const selectFormat = (data) => {
+    let format 
+    if (selectedCelsius){
+        format = data.tempCelsius + 'ºC'
+    }
+    else {
+        format = data.tempFarenheit + 'ºF'
+    }
+    return format
+}
 
 const createContainer = async (city) => {
     const div = document.createElement('div')
@@ -36,23 +60,29 @@ const createContainer = async (city) => {
     const span = document.createElement('span')
     const h2 = document.createElement('h2')
     const img = document.createElement('img')
+    const alignDiv = document.createElement('div')
+    const btn = createSwitchBtn()
+    
     const myData = await requestInfo(city)
 
     para.textContent = `${myData.name}, ${myData.country}:`
-    span.textContent = myData.tempCelsius + ' ºC'
+    span.textContent = selectFormat(myData)
     img.src = "https://" + myData.weather
     h2.textContent = 'Humidity: ' + myData.humidity + '%'
 
     div.classList = 'container'
+
     div.appendChild(para)
-    div.appendChild(img)
-    div.appendChild(span)
-    
+    alignDiv.appendChild(img)
+    alignDiv.appendChild(span)
+    alignDiv.appendChild(btn)
+    div.appendChild(alignDiv)
     div.appendChild(h2)
 
     infoDiv.appendChild(div)
 }
 
 const display = () => {
-    createContainer(city.value)
+    createContainer(city.value, selectedCelsius)
 }
+
